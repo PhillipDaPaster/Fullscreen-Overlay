@@ -5,12 +5,11 @@ ImGui External Overlay using CreateWindowInBand for Setting Zindex above all oth
   <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white">
   <img src="https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white">
   <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white">
-  <img src="https://img.shields.io/badge/license-GPL_3.0-blue?style=for-the-badge&logo=&logoColor=whit">
+  <img src="https://img.shields.io/badge/license-Apache-blue?style=for-the-badge&logo=&logoColor=whit">
 </p>
 
 ## Example
 ![image](https://github.com/user-attachments/assets/55e70369-31a8-47d1-a9a9-2da7c89bd0e5)
-
 
 
 ## Dependencies 
