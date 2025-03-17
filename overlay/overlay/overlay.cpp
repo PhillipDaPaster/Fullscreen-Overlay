@@ -20,20 +20,26 @@ std::pair<HWND, WNDCLASSEXW> CreateWindowWithBand(std::wstring name) {
     ATOM res = RegisterClassExW(&wc);
     if (!res) {
         DWORD dwError = GetLastError();
-        printf("RegisterClassExW failed with error code 0x%08X\n", dwError);
+#if defined(_DEBUG)
+        printf("RegisterClassExW error: 0x%08X\n", dwError);
+#endif
         return { nullptr, {} };
     }
 
     CreateWindowInBand pCreateWindowInBand = reinterpret_cast<CreateWindowInBand>(GetProcAddress(LoadLibraryA("user32.dll"), "CreateWindowInBand"));
     if (!pCreateWindowInBand) {
+#if defined(_DEBUG)
         printf("Failed to get CreateWindowInBand\n");
+#endif
         return { nullptr, {} };
     }
 
-    HWND hwnd = pCreateWindowInBand(WS_EX_TOPMOST | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW, res, name.c_str(), WS_POPUP, 0, 0, 0, 0, NULL, NULL, wc.hInstance, LPVOID(res), ZBID_UIACCESS);
+    HWND hwnd = pCreateWindowInBand(WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW, res, name.c_str(), WS_POPUP, 0, 0, 0, 0, NULL, NULL, wc.hInstance, LPVOID(res), ZBID_UIACCESS);
     if (!hwnd) {
         DWORD dwError = GetLastError();
-        printf("pCreateWindowInBand failed with error code 0x%08X\n", dwError);
+#if defined(_DEBUG)
+        printf("pCreateWindowInBand error: 0x%08X\n", dwError);
+#endif
         return { nullptr, {} };
     }
 
@@ -50,19 +56,26 @@ std::pair<HWND, WNDCLASSEXW> CreateWindowExW(std::wstring name) {
 
     if (!::RegisterClassExW(&wc)) {
         DWORD dwError = GetLastError();
-        std::cerr << "RegisterClassExW failed with error code 0x" << std::hex << dwError << std::endl;
+#if defined(_DEBUG)
+        printf("RegisterClassExW error: 0x%08X\n", dwError);
+#endif
         return { nullptr, {} };
     }
 
-    HWND hwnd = ::CreateWindowExW(WS_EX_TOPMOST | WS_EX_TRANSPARENT, wc.lpszClassName, L"BeanerBot",  WS_POPUP, 0, 0, 0, 0, NULL, NULL, wc.hInstance, NULL);
+    HWND hwnd = ::CreateWindowExW(WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW, wc.lpszClassName, L"BeanerBot", WS_POPUP, 0, 0, 0, 0, NULL, NULL, wc.hInstance, NULL);
 
     if (!hwnd) {
         DWORD dwError = GetLastError();
-        std::cerr << "CreateWindowExW failed with error code 0x" << std::hex << dwError << std::endl;
+#if defined(_DEBUG)
+        printf("CreateWindowExW error: 0x%08X\n", dwError);
+#endif
         return { nullptr, {} };
     }
 
-    std::cout << "Window created, hwnd: " << hwnd << std::endl;
+#if defined(_DEBUG)
+    printf("Window created hwnd:%p\n", hwnd);
+#endif
+
     return { hwnd, wc };
 }
 
@@ -86,9 +99,10 @@ void c_Overlay::Render(int mode, std::wstring windowname, std::wstring windowcla
         break;
     case Mode::Banding:
         auto error = BandingCheck();
+#if defined(_DEBUG)
         if (ERROR_SUCCESS != error)
-            printf("UIAccess error: 0x%08X\n", error);
-
+            printf("UIAccess error: 0x%08X\n", dwError);
+#endif
         std::tie(hwnd, wc) = CreateWindowWithBand(L"Banding"); // dont print before this it causes double prints
         break;
     }
