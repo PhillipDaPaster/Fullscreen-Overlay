@@ -79,7 +79,6 @@ std::pair<HWND, WNDCLASSEXW> CreateWindowExW(std::wstring name) {
     return { hwnd, wc };
 }
 
-
 void c_Overlay::Render(int mode, std::wstring windowname, std::wstring windowclass) {
     HWND GameHwnd = FindWindowW(windowclass.c_str(), windowname.c_str());
 
@@ -98,9 +97,9 @@ void c_Overlay::Render(int mode, std::wstring windowname, std::wstring windowcla
         std::tie(hwnd, wc) = CreateWindowExW(L"CreateWin");
         break;
     case Mode::Banding:
-        auto error = BandingCheck();
+        auto dwError = BandingCheck();
 #if defined(_DEBUG)
-        if (ERROR_SUCCESS != error)
+        if (ERROR_SUCCESS != dwError)
             printf("UIAccess error: 0x%08X\n", dwError);
 #endif
         std::tie(hwnd, wc) = CreateWindowWithBand(L"Banding"); // dont print before this it causes double prints
