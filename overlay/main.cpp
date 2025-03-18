@@ -3,9 +3,9 @@
 #include <thread>
 
 int main() {
+        std::thread([&]() { overlay.Render(Mode::Banding, L"Counter-Strike 2", L"SDL_app"); }).detach(); // dont print before this it causes double prints
 
-	std::thread(&c_Overlay::Render, &overlay, Mode::Banding, L"Counter-Strike 2", L"SDL_app").detach(); // dont print before this it causes double prints
-
+        // temp to not close the cheat after threads complete
 	while (true) {
 		Sleep(5);
 	}
