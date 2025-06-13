@@ -12,6 +12,10 @@ ImGui External Overlay using CreateWindowInBand for Setting Zindex above all oth
 ![image](https://github.com/user-attachments/assets/55e70369-31a8-47d1-a9a9-2da7c89bd0e5)
 
 
+![2](https://img.shields.io/github/downloads/PhillipDaPaster/Fullscreen-Overlay/total)
+![3](https://img.shields.io/github/license/PhillipDaPaster/Fullscreen-Overlay)
+![4](https://img.shields.io/github/issues/PhillipDaPaster/Fullscreen-Overlay)
+
 ## Dependencies 
 > <mark>**[DirectX](https://learn.microsoft.com/en-us/windows/uwp/cpp-and-winrt-apis/intro-to-using-cpp-with-winrt]).**</mark><br>
 > Required for accessing DirectX Api like `ID3D11Device` and `IDXGISwapChain`.  
